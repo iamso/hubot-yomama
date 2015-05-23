@@ -8,13 +8,16 @@
 # Author:
 #   iamso
 #
+
+URL = "http://api.yomomma.info/"
+
 module.exports = (robot) ->
 
-  robot.hear /yo\s?mama/i, (res) ->
-    robot.http("http://api.yomomma.info/")
+  robot.hear /(yo\s?mama)|your\smom/i, (res) ->
+    robot.http(URL)
       .get() (err, resp, body) ->
         data = JSON.parse body
         if err
-          res.send 'Sorry, yo mama didn\'t answer.'
+          res.send "Sorry, yo mama didn't answer."
         else
           res.reply data.joke
